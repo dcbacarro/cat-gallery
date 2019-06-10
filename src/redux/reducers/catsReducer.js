@@ -3,6 +3,7 @@
 import produce from 'immer'
 import {
   LOAD_BREEDS,
+  LOAD_FAVORITES,
   SET_CURRENT_BREED,
   SET_LOADING,
   SET_IMAGE
@@ -10,6 +11,7 @@ import {
 
 const initialState = {
   breeds: [],
+  favorites: [],
   loading: false,
   currentBreed: null
 }
@@ -21,6 +23,9 @@ export default produce((draft, action) => {
     break
     case LOAD_BREEDS:
       draft.breeds = action.breeds
+    break
+    case LOAD_FAVORITES:
+      draft.favorites = action.favorites
     break
     case SET_CURRENT_BREED:
       draft.currentBreed = action.breed

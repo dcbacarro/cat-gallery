@@ -6,7 +6,7 @@ import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 import GridListTileBar from '@material-ui/core/GridListTileBar'
 import { makeStyles } from '@material-ui/core/styles'
-import { fetchBreeds } from '../redux/actions'
+import { fetchBreeds, fetchFavorites } from '../redux/actions'
 import Tile from './Tile'
 import Card from '@material-ui/core/Card';
 import Info from './Info';
@@ -46,6 +46,7 @@ const Gallery = (props) => {
 
   useEffect(() => {
     dispatch(fetchBreeds())
+    dispatch(fetchFavorites())
   }, [dispatch])
 
   const classes = useStyles();

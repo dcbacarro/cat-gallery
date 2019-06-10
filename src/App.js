@@ -8,13 +8,13 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import blue from '@material-ui/core/colors/blue';
-import green from '@material-ui/core/colors/green';
+import red from '@material-ui/core/colors/red'
 import './App.css'
 
 const theme = createMuiTheme({
   palette: {
     primary: blue,
-    secondary: green,
+    secondary: red,
   },
   status: {
     danger: 'orange',
