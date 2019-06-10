@@ -108,4 +108,6 @@ const Gallery = (props) => {
   )
 }
 
+Gallery.whyDidYouRender = true
+
 export default withWidth()(Gallery)

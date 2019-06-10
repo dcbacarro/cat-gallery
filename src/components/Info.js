@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -22,7 +22,8 @@ import { makeStyles, useTheme } from '@material-ui/core/styles'
 import Rating from 'react-rating'
 import SwipeableView from 'react-swipeable-views'
 import { autoPlay } from 'react-swipeable-views-utils'
-import { fetchFavorites } from '../redux/actions';
+import { fetchFavorites } from '../redux/actions'
+import deepEqual from 'deep-equal'
 
 const AutoSwipeView = autoPlay(SwipeableView)
 
@@ -121,8 +122,8 @@ const Info = ({ data }) => {
   useEffect(() => {
     if (open) {
       async function doFetch() {
-        let images = await fetchImages(data.id)
-        images = images.map(image => {
+        let imgs = await fetchImages(data.id)
+        imgs = imgs.map(image => {
           const index = favorites.findIndex(fav => fav.image_id === image.id)
           if (index !== -1)
             image.favoriteId = favorites[index].id
@@ -130,11 +131,11 @@ const Info = ({ data }) => {
             image.favoriteId = null
           return image
         })
-        setImages(images)
+        if (!deepEqual(images, imgs)) setImages(imgs)
       }
       doFetch()
     }
-  }, [open, data.id, favorites])
+  }, [open, data.id, favorites, images])
 
   function handleClickOpen() {
     setOpen(true);
@@ -150,7 +151,7 @@ const Info = ({ data }) => {
 
   return (
     <>
-     <IconButton onClick={handleClickOpen} className={classes.icon}>
+      <IconButton onClick={handleClickOpen} className={classes.icon}>
         <InfoIcon />
       </IconButton> 
       <Dialog
@@ -325,4 +326,6 @@ const Info = ({ data }) => {
   )
 }
 
-export default Info
+Info.whyDidYouRender = true
+
+export default memo(Info)
