@@ -2,7 +2,7 @@ version: 2.0
 os: linux
 files:
   - source: /home
-    destination: /home/app
+    destination: /home/ubuntu
 hooks:
   BeforeInstall:
     - location: before_install.sh
